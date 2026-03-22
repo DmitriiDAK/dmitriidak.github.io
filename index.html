@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dmitrii DAK — Portfolio</title>
+  <meta name="description" content="Портфолио: CGI, дизайн, AI-пайплайны, обучение. Кейсы, услуги и интерактивная демо-сцена.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0ea5e9">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://https://dmitriidak.github.io/">
+  <meta property="og:site_name" content="Dmitrii DAK">
+  <meta property="og:title" content="Dmitrii DAK — AI & CGI Pipeline Architect">
+  <meta property="og:description" content="Автоматизация графики, внедрение AI в продакшн и интерактивное демо.">
+  <meta property="og:image" content="https://dmitriidak.github.io/assets/og-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dmitrii DAK — AI & CGI Portfolio">
+  <meta name="twitter:description" content="Автоматизация графики и внедрение AI. Посмотри интерактивное демо!">
+  <meta name="twitter:image" content="https://dmitriidak.github.io/assets/og-preview.png">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="weather-canvas"></canvas>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo"> Dmitrii <button id="GameCatRunner">DAK</button> </div>
+        <a href="#work" class="btn">Кейсы</a>
+        <a href="#services" class="btn">Услуги</a>
+        <a href="#demo" class="btn">Демо</a>
+        <div class="spacer"></div>
+        <button id="langToggle" class="btn" aria-label="Switch language">EN</button>
+      </nav>
+    </div>
+    <div id="holiday-garland" class="garland-container"></div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="left card">
+        <h1 class="title">AI и CGI-пайплайны, которые ускоряют продакшн и улучшают качество</h1>
+        <p class="subtitle">Специализация: Stable Diffusion (Forge/ComfyUI/InvokeAI), граф- и web дизайн, моушн, пост-прод, методология и обучение команд.</p>
+        <div class="tagrow">
+          <span class="tag">⏳&#xFE0F; −30–60% времени</span>
+          <span class="tag">🎯 Стабильные результаты</span>
+          <span class="tag">🧩 Внедрение за 1–2 недели</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary js-mail" href="#" data-mail="bXJkYWswOTZAZ21haWwuY29t">Записаться на разбор пайплайна</a>
+          <a class="btn" href="assets/cv.pdf" target="_blank" rel="noopener">Скачать резюме (PDF)</a>
+        </div>
+      </div>
+      <div class="avatar card" aria-hidden="true">
+        <img src="assets/I.webp" alt="Портрет Дмитрия">
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="title-underlay">Выбранные кейсы</div>
+      <h2 class="sr-only">Выбранные кейсы</h2>
+
+      <div class="carousel3d" aria-label="3D галерея кейсов">
+        <div class="viewport">
+          <div class="stage"><div class="tilt">
+            <div class="ring" style="--count: 8">
+              <a class="panel" style="--i:0" href="https://bhv.ru/product/stable-diffusion-22-uroka-dlya-nachinayushhih/?srsltid=AfmBOop0LvYJDFzIz1CSBo2TaS8ZRMIX1NkiUpjV4OlfRowrhQ8faeXi"><img src="assets/book.webp" alt="Книга по Stable Diffusion"></a>
+              <a class="panel" style="--i:1" href="https://www.youtube.com/playlist?list=PLyxysChHv4CDCYpzYCmsH1CSpY1dG_0eL"><img src="assets/kurs.webp" alt="Видеокурс Inkscape"></a>
+              <a class="panel" style="--i:2" href="https://www.behance.net/gallery/188830159/portfolio-v-sfere-grafiki"><img src="assets/demiand.webp" alt="Постеры для Demiand"></a>
+              <a class="panel" style="--i:3" href="https://www.behance.net/gallery/188830159/portfolio-v-sfere-grafiki"><img src="assets/borok.webp" alt="Сайт для фирмы Бороценка"></a>
+              <a class="panel" style="--i:4" href="https://www.behance.net/gallery/188830159/portfolio-v-sfere-grafiki"><img src="assets/faceswap.webp" alt="AI-пайплайн (Замена лиц)"></a>
+              <a class="panel" style="--i:5" href="https://www.youtube.com/shorts/yOX6Vcm0LDA"><img src="assets/platie.webp" alt="AI Реклама одежды"></a>
+              <a class="panel" style="--i:6" href="#"><img src="assets/bank.webp" alt="Реклама карты Альфа-банка"></a>
+              <a class="panel" style="--i:7" href="https://www.youtube.com/shorts/sBmQEJYdMhw"><img src="assets/3d.webp" alt="Анимация в Blender 3D GeoNode"></a>
+            </div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- Habr articles scroller -->
+      <div class="articles">
+        <button class="arrow left" id="articles-left" aria-label="Назад">‹</button>
+        <div class="viewport" id="articles-vp">
+          <div class="track">
+            <a class="article-card card tile" href="https://habr.com/ru/articles/683592/" target="_blank" rel="noopener">
+              <h3>Inkscape с 0 до Pro за 5 дней</h3>
+              <p class="meta">Обучающий мини-курс по программе для векторной графики Inkscape</p>
+              <p class="meta">62K просмотров • 294 сохранения • 43 комментария</p>
+            </a>
+            <a class="article-card card tile" href="https://habr.com/p/891756/" target="_blank" rel="noopener">
+              <h3>5 бесплатных программ для масштабирования видео как альтернатива платному Topaz Video AI</h3>
+              <p class="meta">Разбор 5 БЕСПЛАТНЫХ программ, которые помогут улучшить твои видео.</p>
+              <p class="meta">10K просмотров • 50 сохранений • 14 комментариев</p>
+            </a>
+            <a class="article-card card tile" href="https://habr.com/p/927178/" target="_blank" rel="noopener">
+              <h3>Девушки, котики и Flux Kontext: как выжать максимум из WebUI Forge?</h3>
+              <p class="meta">Будет рассмотрено сравнение моделей Flux dev Q8_0.GGUF с Flux Kontext dev Q8_0.GGUF и Flux Kontext dev bnb-nf4 + Hyper Flux.1 dev-8steps Lora и с Flux Kontext dev.safetensors</p>
+              <p class="meta">8K просмотров • 35 сохранений • 16 комментариев</p>
+            </a>
+            <a class="article-card card tile" href="https://habr.com/p/936504/" target="_blank" rel="noopener">
+              <h3>LLM в кармане: запускаю локальные модели на Samsung S24 Ultra через PocketPal — бенчмарки, настройки и туториал</h3>
+              <p class="meta">Разбор PocketPal на Samsung S24 Ultra: как поставить модели в GGUF, какие кванты выбирать под 12 ГБ RAM</p>
+              <p class="meta">8.5K просмотров • 70 сохранение • 11 комментариев</p>
+            </a>
+            <a class="article-card card tile" href="#" target="_blank" rel="noopener">
+              <h3>Flux Kontext проигрывает ControlNET: уроки новичкам</h3>
+              <p class="meta">Сравнение и анализ Flux Kontext 1-Dev.safetensors с ControlNet (ControlNET для SD 1.5 и SDXL и FluxTools-V2 для Flux) и с ChatGPT</p>
+              <p class="meta">9.9K просмотров • 140 сохранений • 22 комментария</p>
+            </a>
+            <a class="article-card card tile" href="https://dtf.ru/id595875/3973854-uznaj-geroev-iz-populyarnyh-igr-i-ikh-arta" target="_blank" rel="noopener">
+              <h3>Герои из самых узнаваемых компьютерных игр детства</h3>
+              <p class="meta">Работа выполнена в ChatGPT + Photoshop, использован бесплатный пиксельный шрифт GNF.</p>
+              <p class="meta">2K просмотров • 5 сохранений • 14 комментария</p>
+            </a>
+            <a class="article-card card tile" href="https://tenchat.ru/media/3416502-video-v-1-klik-novosti-ai" target="_blank" rel="noopener">
+              <h3>Видео в 1 клик: новости AI</h3>
+              <p class="meta">Китайская корпорация ByteDance - они владеют TikTok и CapCut - готовят к выходу новый генератор видео...</p>
+              <p class="meta">5.3K просмотров • 60 лайков • 5 комментариев</p>
+            </a>
+          </div>
+        </div>
+        <button class="arrow right" id="articles-right" aria-label="Вперёд">›</button>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2>Услуги</h2>
+      <div class="srv-wrap">
+        <div class="srv-list" id="srv-list">
+          <div class="srv-item" data-img="assets/sxema.webp"><span class="kicker">#01</span><span class="title">Настройка AI‑пайплайнов (ComfyUI/Forge/InvokeAI/Text Generation WebUI/Flowise/Relevance AI/n8n)</span></div>
+          <div class="srv-item" data-video-webm="assets/svc6.webm" data-video-mp4="assets/svc2.mp4" data-poster="assets/svc2_poster.jpg"><span class="kicker">#02</span><span class="title">Создание анимированных 3D/2D баннеров, постеров</span></div>
+          <div class="srv-item" data-img="assets/ypak.webp" data-link="https://www.behance.net/gallery/188830159/portfolio-v-sfere-grafiki"><span class="kicker">#03</span><span class="title">Создание дизайна упаковки</span></div>
+          <div class="srv-item" data-img="assets/fly.webp" data-link="https://www.behance.net/gallery/188830159/portfolio-v-sfere-grafiki"><span class="kicker">#04</span><span class="title">Создание статичных рекламных баннеров, постеров, обложек, флаеров, промо-арт</span></div> <!-- Атрибут с адресом на сайт data-link="https://example.com/full-service-1" -->
+          <div class="srv-item" data-video-webm="assets/clip.webm" data-link="https://youtu.be/gyK0EooEaFM?si=ss_skFFAaIy5wb-w" data-video-mp4="assets/svc5.mp4" data-poster="assets/svc5_poster.jpg"> <span class="kicker">#05</span><span class="title">AI генерация и монтаж видео, цветокор, звук</span></div>
+          <div class="srv-item" data-img="assets/kniga.webp" data-link="https://www.behance.net/gallery/188830159/portfolio-v-sfere-grafiki"><span class="kicker">#06</span><span class="title">Полиграфия. Создание комиксов, обложек книг</span></div>
+          <div class="srv-item" data-video-webm="assets/borok.webm" data-video-mp4="assets/svc3.mp4" data-poster="assets/svc3_poster.jpg" data-link="https://www.behance.net/gallery/188830159/portfolio-v-sfere-grafiki"> <span class="kicker">#07</span> <span class="title">Создание сайтов/приложений на Tilda, Framer, Webflow, WordPress, Битрикс24</span></div>
+          <div class="srv-item" data-img="assets/kurs1.webp"> <span class="kicker">#08</span> <span class="title">Разработка курсов для корпоративного сегмента и обучение команд (Power Point, ISpring Suite, OBS)</span> </div>
+          <div class="srv-item" data-img="assets/preza.webp"><span class="kicker">#09</span><span class="title">Создание корпоративных презентаций (Power Point)</span></div>
+          <div class="srv-item" data-img="assets/retyh.webp"><span class="kicker">#10</span><span class="title">Ретушь фото</span></div>
+        </div>
+        <div class="srv-preview" id="srv-preview" aria-hidden="true">
+          <img id="srv-img" src="assets/sxema.webp" alt="Превью услуги">
+          <video id="srv-vid" muted playsinline loop preload="none" style="display:none"></video>
+        </div> 
+      </div>
+    </section>
+
+
+    <section class="pipeline-section">
+  <div class="pipeline-container">
+    
+    <div class="blueprint">
+        <div class="blueprint-header">Этап 1</div>
+        <div class="blueprint-body">
+            <h4>Аналитика и R&D</h4>
+            <p>Анализ ТЗ, аудит текущего пайплайна и создание Roadmap проекта.</p>
+            <div class="extra-badge">+ ТЗ / Аудит</div>
+            <div class="software-list">Notion / Mindmaps / Yonote</div>
+        </div>
+    </div>
+
+    <div class="blueprint">
+        <div class="blueprint-header">Этап 2</div>
+        <div class="blueprint-body">
+            <h4>AI Production</h4>
+            <p>Генерация концептов и ассетов в Local ComfyUI, MJ или Google Nano Banana.</p>
+            <div class="extra-badge">+ LoRA / .PSD</div>
+            <div class="software-list">ComfyUI / Midjourney / Photoshop</div>
+        </div>
+    </div>
+
+    <div class="blueprint">
+        <div class="blueprint-header">Этап 3</div>
+        <div class="blueprint-body">
+            <h4>CGI и 3D Моделинг</h4>
+            <p>Создание геометрии и симуляций в Blender или Houdini.</p>
+            <div class="extra-badge">+ .blend / .hip</div>
+            <div class="software-list">Blender / Houdini</div>
+        </div>
+    </div>
+
+    <div class="blueprint">
+        <div class="blueprint-header">Этап 4</div>
+        <div class="blueprint-body">
+            <h4>VFX & Compositing</h4>
+            <p>Финальная сборка слоев и техническая ретушь в Nuke или After Effects.</p>
+            <div class="extra-badge">+ Проекты слоев</div>
+            <div class="software-list">Nuke / AE</div>
+        </div>
+    </div>
+
+    <div class="blueprint">
+        <div class="blueprint-header">Этап 5</div>
+        <div class="blueprint-body">
+            <h4>Монтаж и Финиш</h4>
+            <p>Сборка видео, цветокоррекция и саунд-дизайн в DaVinci или Premiere.</p>
+            <div class="extra-badge">+ Исходники монтажа</div>
+            <div class="software-list">DaVinci / Premiere</div>
+        </div>
+    </div>
+
+    <div class="blueprint">
+        <div class="blueprint-header">Этап 6</div>
+        <div class="blueprint-body">
+            <h4>Delivery & EDU</h4>
+            <p>Обучение команды работе с пайплайном и создание веб-презентации.</p>
+            <div class="extra-badge">+ Видеокурс / Web / .PPTX / .HTML</div>
+            <div class="software-list">Tilda / OBS / PowerPoint</div>
+        </div>
+    </div>
+
+  </div>
+
+  <div class="blueprint-action-wrapper">
+      <a href="assets/DMITRIIDAK.pdf" download class="blueprint-trigger">
+          <span class="btn-text">Скачать Технический Roadmap (PDF)</span>
+      </a>
+  </div>
+</section>
+
+
+
+    <!-- Pseudo-ComfyUI -->
+    <section id="demo">
+      <h2 class="section-title">Соберите мини-граф и запустите демо</h2>
+      <div class="toolbar">
+        <button class="btn primary" id="runBtn" style="color:#fff">Запустить демо</button>
+        <a class="btn" id="bookBtn" href="https://t.me/dmitry_starlord">Записаться на разбор пайплайна</a>
+      </div>
+      <div class="workspace" id="ws">
+        <svg class="edges" id="edges"></svg>
+
+        <!-- LEFT COLUMN -->
+        <div class="node" id="n-pos" style="left:24px; top:24px">
+          <div class="title">Кодировщик текста CLIP (Положительный)</div>
+          <div class="body">Beautiful ginger cat lying on the couch, looking straight at the camera, close-up, cute cat, daylight, good lighting</div>
+          <div class="ports">
+            <div class="port t-clip" data-id="clip" data-type="clip" data-dir="in"><span class="dot"></span>CLIP</div>
+            <div class="port t-cond" data-id="pos" data-type="cond_pos" data-dir="out"><span class="dot"></span><span class="port-label">положительный</span></div>
+          </div>
+        </div>
+
+        <div class="node" id="n-neg" style="left:24px; top:232px">
+          <div class="title">Кодировщик текста CLIP (Отрицательный)</div>
+          <div class="body">text, watermark…</div>
+          <div class="ports">
+            <div class="port t-clip" data-id="clip" data-type="clip" data-dir="in"><span class="dot"></span>CLIP</div>
+            <div class="port t-neg"  data-id="neg"  data-type="cond_neg" data-dir="out"><span class="dot"></span><span class="port-label">отрицательный</span></div>
+          </div>
+        </div>
+
+        <div class="node" id="n-size" style="left:24px; top:440px">
+          <div class="title">Параметры изображения</div>
+          <div class="body">1024×1024 • seed=42</div>
+          <div class="ports">
+            <div class="port t-latent" data-id="latent" data-type="latent" data-dir="out"><span class="dot"></span>Latent</div>
+          </div>
+        </div>
+
+        <!-- MIDDLE COLUMN -->
+        <div class="node" id="n-checkpoint" style="left:352px; top:140px">
+          <div class="title">Загрузить Checkpoint</div>
+          <div class="body">Flux 1-Dev</div>
+          <div class="ports">
+            <div class="port t-model" data-id="model" data-type="model" data-dir="out"><span class="dot"></span><span class="port-label">модель</span></div>
+            <div class="port t-clip"  data-id="clip"  data-type="clip"  data-dir="out"><span class="dot"></span>CLIP</div>
+            <div class="port t-vae"   data-id="vae"   data-type="vae"   data-dir="out"><span class="dot"></span>VAE</div>
+          </div>
+        </div>
+
+        <div class="node" id="n-ksampler" style="left:352px; top:340px">
+          <div class="title">KSampler</div>
+          <div class="ports">
+            <div class="port t-model"  data-id="model"  data-type="model"  data-dir="in"><span class="dot"></span><span class="port-label">модель</span></div>
+            <div class="port t-cond"   data-id="pos"    data-type="cond_pos" data-dir="in"><span class="dot"></span><span class="port-label">положительный</span></div>
+            <div class="port t-neg"    data-id="neg"    data-type="cond_neg" data-dir="in"><span class="dot"></span><span class="port-label">отрицательный</span></div>
+            <div class="port t-latent" data-id="latent" data-type="latent" data-dir="in"><span class="dot"></span><span class="port-label">Latent (вход)</span></div>
+            <div class="port t-latent" data-id="out_latent" data-type="latent" data-dir="out"><span class="dot"></span><span class="port-label">Latent (выход)</span></div>
+          </div>
+          <div class="progress"><i id="bar"></i></div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="node" id="n-vae" style="left:680px; top:180px">
+          <div class="title">Декодировать VAE</div>
+          <div class="ports">
+            <div class="port t-latent" data-id="samples" data-type="latent" data-dir="in"><span class="dot"></span><span class="port-label">образцы</span></div>
+            <div class="port t-vae"    data-id="vae"     data-type="vae"    data-dir="in"><span class="dot"></span>vae</div>
+            <div class="port t-image"  data-id="image"   data-type="image"  data-dir="out"><span class="dot"></span><span class="port-label">изображение</span></div>
+          </div>
+        </div>
+
+        <div class="node save" id="n-save" style="left:680px; top:400px">
+          <div class="title">Сохранить изображение</div>
+          <div class="ports">
+            <div class="port t-image" data-id="image" data-type="image" data-dir="in"><span class="dot"></span><span class="port-label">изображение</span></div>
+          </div>
+          <div class="preview" id="preview"><img alt="Рыжий кот" src="assets/cat.png"></div>
+          <div class="cta" id="cta">
+            <span class="cta-text">Помогу собрать ваш реальный пайплайн за 1–2 недели. </span>
+            <a class="btn" href="https://t.me/dmitry_starlord" target="_blank" rel="noopener">Telegram</a> 
+            <a class="btn" id="mailLink" href="mailto:dmitriidak@gmail.com">Email</a> 
+            <a class="btn download-btn" href="assets/DAK_Workflow.zip" download="DAK_Workflow.zip" class="download-btn" target="_blank" rel="noopener">💾 <span class="dl-text">Скачать демо workflow</span></a> 
+            <script>
+              document.getElementById('mailLink').addEventListener('click', function(e){
+               // Дадим системе шанс открыть mailto за 300 мс
+                  setTimeout(function(){
+                  // если ничего не произошло (пользователь сам не отменил переход),
+                  // можно открыть Gmail как запасной вариант
+                  window.open('https://mail.google.com/mail/?view=cm&fs=1&to=mrdak096@gmail.com','_blank','noopener');
+                  }, 300);
+              });
+            </script>
+
+            <!--  <a href="#" onclick="alert('Откроется календарь бронирования');return false;">Календарь</a> -->
+          </div>
+        </div>
+        <div id="wsHint" class="ws-hint" role="note">
+            Подсказка: кликай по портам, соединяй узлы и жми «Запустить демо».
+        </div>
+      </div>
+    </section>
+    <section id="lifestyle">
+  <h2 id="ssulki">Мои ссылки</h2>
+  <div class="ls-grid">
+    <a class="btn sm" href="https://t.me/photoudzen" target="_blank" rel="noopener">Telegram</a>
+    <a class="btn sm" href="https://vk.com/dmitriidak" target="_blank" rel="noopener">VK</a>
+    <a class="btn sm" href="https://habr.com/ru/users/Dmitrii_DAK/articles/" target="_blank" rel="noopener">Habr</a>
+    <a class="btn sm" href="https://dtf.ru/id2997274" target="_blank" rel="noopener">DTF</a>
+    <a class="btn sm" href="https://www.youtube.com/@dmitriidak" target="_blank" rel="noopener">YouTube</a>
+    <a class="btn sm" href="https://www.behance.net/kowalenckodmitrii" target="_blank" rel="noopener">Behance</a>
+    <a class="btn sm" href="https://medium.com/@dmitriidak" target="_blank" rel="noopener">Medium</a>
+    <a class="btn sm" href="https://vc.ru/id1282034" target="_blank" rel="noopener">VC</a>
+    <a class="btn sm" href="https://dsgners.ru/dmitriidak" target="_blank" rel="noopener">Dsgners</a>
+    <a class="btn sm" href="https://www.instagram.com/dmitrii_dak" target="_blank" rel="noopener"><span class="lang-txt">Моя жизнь</span></a>
+  </div>
+</section>
+
+
+<section id="hobbies">
+  <h2 class="section-title" id="hobbies-title">Обо мне</h2>
+
+  <div class="photo-stack" id="photoStack">
+    <div class="card"><img src="assets/kavkaz.webp" alt="Горы Кавказа - фото на Pentax K-s2"><div class="card-caption"> <strong class="lang-txt"> Пятигорск. Автопортрет на смартфон </strong> </div> </div>
+    <div class="card"><img src="assets/girl1.webp" alt="Весна. Девушка"><div class="card-caption"> <strong class="lang-txt"> Весна. </strong> Pentax K-S2 50mm f/1.8, 1/3200s</div> </div>
+    <div class="card"><img src="assets/girl2.webp" alt="Женский портрет"><div class="card-caption"> <strong> Женский портрет. </strong> Pentax K-S2 35mm f/2.4, 1/500s</div></div>
+    <div class="card portrait"><video muted playsinline preload="none" src="assets/plov.webm" alt="Кулинария"></video><div class="card-caption"> <strong class="lang-txt">Готовим плов</strong></div></div>
+    <div class="card"><img src="assets/tutor.webp" alt="Обучающее видео"> <div class="card-caption"> <strong class="lang-txt"> Flux Kontext проигрывает ControlNET: уроки новичкам </strong> </div> </div>
+    <div class="card portrait"><video muted playsinline preload="none" src="assets/sports.webm" alt="Занятие спортом"></video><div class="card-caption"> <strong class="lang-txt">Занятие спортом. Юмористический монтаж</strong></div></div>
+    <div class="card"><img src="assets/rep.webp" alt="Музыкальные клипы"><div class="card-caption"> <strong class="lang-txt"> Концептуальная фотография.</strong> Pentax K-S2 18mm f/3.5, 1/3200s </div></div>
+    <div class="card"><img src="assets/mount.webp" alt="Красная Поляна - фото на Pentax K-S2"><div class="card-caption"> <strong class="lang-txt"> Роза Хутор. </strong> Pentax K-S2 300mm f/6.3, 1/250s</div></div>
+    <div class="card"><img src="assets/ant.webp" alt="Макрофото"><div class="card-caption"> <strong class="lang-txt"> Муравей. </strong> Pentax K-S2 35mm f/2.4, 1/500s</div></div>
+    <div class="card"><img src="assets/mah.webp" alt="Макрофото"><div class="card-caption"> <strong class="lang-txt"> Предметное фото. </strong> Pentax K-S2 135mm f/3.5, 1/500s</div></div>
+    <div class="card"><img src="assets/nutkj.webp" alt="Макрофото"><div class="card-caption"> <strong class="lang-txt"> Нитки. </strong> Pentax K-S2 300mm f/1.8, 1/50s</div></div>
+    <div class="card"><img src="assets/reka.webp" alt="Река"> <div class="card-caption"> <strong class="lang-txt"> Сказка. </strong> Pentax K-S2 50mm f/1.8, 1/3200s</div> </div>
+    <div class="card"> <img src="assets/city.webp" alt="Город осенью"> <div class="card-caption"><strong class="lang-txt"> Пустые городские улицы.</strong> Pentax K-S2, 18mm, F3.5, 1/500s</div> </div>
+  </div>
+
+  <div class="hobby-hint" id="hobbyHint">
+    Проведите пальцем(мышкой) по верхней карточке — она уйдёт в конец стопки.
+  </div>
+</section>
+
+</main>
+
+<button id="weatherToggle" class="weather-btn show">
+  <div class="weather-content">
+    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+    <div class="spinner-ring"></div>
+  </div>
+</button>
+
+<button id="toTop" class="btn" aria-label="Наверх" title="Наверх">
+  <svg class="icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <path d="M12 19V5M12 5l-5 5M12 5l5 5"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+
+
+<section id="terminal-section" class="container">
+  <div class="terminal-window" id="terminalWindow">
+    
+    <div class="terminal-header">
+      <div class="header-left">
+        <div class="cmd-icon-css">
+           <span class="cmd-icon-text">C:\.</span>
+        </div>
+           <span class="header-title">C:\Windows\system32\cmd.exe</span>
+      </div>
+      <div class="header-right">
+        <span class="win-btn">_</span>
+        <span class="win-btn">□</span>
+        <span class="win-btn close">X</span>
+      </div>
+    </div>
+
+    <div class="terminal-body" id="terminalBody">
+      <div id="typing-container"></div>
+      
+      <form id="contact-form" class="hidden-form">
+        <h3 class="lang-txt-h3">Связаться со специалистом DMITRII DAK</h3>
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Ваше имя" required class="form-input">
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Ваш Email" required class="form-input">
+        </div>
+        <div class="form-group">
+          <textarea name="message" placeholder="Опишите задачу или пайплайн" required class="form-textarea"></textarea>
+        </div>
+        <button type="submit" class="btn primary">
+          <span class="lang-txt-btn">Отправить запрос</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<footer class="container footer" style="padding-left:40px"><span class="footer-text">© 2026 Dmitrii DAK · дизайн и разработка</span></footer>
+<!-- 2. В <body> перед </body> — сам оверлей -->
+<div id="cat-game-overlay">
+  <div id="cat-game-wrapper">
+    <div id="cat-game"></div>
+  </div>
+<script src="script.js"></script>    <!-- Основные скрипты сайта -->
+<script src="phasermin.js"></script> <!-- Phaser.js -->
+<script src="CatGame.js"></script> <!-- логика игры отдельным файлом -->
+</div>
+</body>
+</html>

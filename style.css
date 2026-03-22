@@ -1,0 +1,1235 @@
+    :root { --bg: #0b0c10; --panel: #11131a; --text: #ffffff; --muted: #a6a6a6; --accent: #0ea5e9; --border: #1f2330; --radius: 16px; --shadow: 0 10px 30px rgba(0,0,0,.35); }
+    html, body { margin:0; padding:0; color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: linear-gradient(180deg, #e9d8ff 0%, #cab8ff 25%, #a08bff 45%, #5b4ea3 65%, #1f2230 82%, #000000 100%); }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1040px; padding: 24px; margin: 0 auto; }
+    header { position: sticky; top: 0; backdrop-filter: saturate(180%) blur(8px); background: rgba(21,27,36,.65); border-bottom: 1px solid var(--border); z-index: 50; }
+    nav { display:flex; align-items:center; gap:20px; height:64px; }
+    nav .logo { font-weight:700; letter-spacing:.2px; font-size: clamp(20px, 2.2vw, 18px); }
+    nav .spacer { flex:1; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border:1px solid var(--border); border-radius:12px; background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 94%, transparent) 0%, var(--panel) 100%); font-weight: 700; box-shadow: var(--shadow); transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease; z-index: 1; cursor:pointer }
+    .btn:hover { transform: translateY(-1px); border-color:#93c5fd; z-index: 1; background: linear-gradient(180deg, rgba(147,197,253,.25), rgba(147,197,253,.05)); box-shadow: 0 10px 30px rgba(147,197,253,.25); }
+    .btn.primary { border-color:#93c5fd; z-index: 1;}
+    .hero { display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; margin-top:36px; }
+    .card { border:1px solid var(--border); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+    .hero .left { padding:28px; z-index: 1;}
+    .title { font-size: clamp(28px, 4vw, 44px); line-height:1.1; margin: 0 0 12px;}
+    .subtitle { color: var(--muted); font-size: clamp(20px, 2.2vw, 18px); margin: 0 0 18px; }
+    .tagrow { display:flex; flex-wrap:wrap; gap:8px; margin-bottom: 18px; }
+    .tag { font-size: 15px; color: var(--muted); border:1px solid var(--border); padding:.35rem .6rem; border-radius: 999px; }
+    .cta { display:flex; gap:12px; flex-wrap: wrap; }
+    .avatar { display:flex; align-items:center; justify-content:center; padding:0; overflow:hidden; z-index: 1;}
+    .avatar img { width:100%; height:100%; display:block; object-fit:cover; object-position: center;}
+    section { margin: 44px 0; }
+    .section-title { font-size: 20px; margin: 0 0 14px; letter-spacing: .2px; }
+    
+    /* Lang toggle */
+    #langToggle { min-width: 44px; font-weight: 700; letter-spacing: .5px; color: #fff;}
+
+
+    /* Carousel */
+    #work { position: relative; padding-top: clamp(56px, 6vw, 84px); }
+    #work .title-underlay { position: absolute; inset: 0 auto auto 0; right:0; top:0; padding: 0 0 12px 0; z-index: 0; color: #000; opacity: .9; font-weight: 700; font-size: 20px; pointer-events: none; }
+    #work .sr-only { position: absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .carousel3d { position: relative; z-index: 1; margin: clamp(6px,1.6vw,12px) 0 clamp(24px, 5vw, 48px); background: transparent; border-radius:16px; padding:0; box-shadow: none;}
+    .carousel3d .viewport { position: relative; min-height: clamp(300px, 44vw, 560px); overflow: visible; border-radius: var(--radius); background: transparent; isolation: isolate; }
+    .carousel3d .stage { position: absolute; inset: 0; perspective: 1600px; }
+    .carousel3d .tilt { position: absolute; inset: 0; transform: rotateX(20deg) scale(.86); transform-origin: center center; transform-style: preserve-3d; display:grid; place-items:center; }
+    .carousel3d .ring { --count: 8; --radius: clamp(170px, 28vw, 340px); position: relative; width: min(100%, 920px); height: min(100%, 500px); transform-style: preserve-3d; animation: spin 30s linear infinite; will-change: transform; margin: 0 auto; }
+    .carousel3d .panel { position: absolute; top: 50%; left: 50%; width: clamp(130px, 15vw, 240px); height: clamp(180px, 20vw, 340px); transform: rotateY(calc(var(--i) * 360deg / var(--count))) translateZ(var(--radius)) translate(-50%, -50%); border-radius: 18px; overflow: hidden; box-shadow: 0 16px 30px rgba(0,0,0,.35); border:1px solid var(--border); background: #0b0c10; }
+    .carousel3d img { width:100%; height:100%; object-fit:cover; display:block; }
+    @keyframes spin { from { transform: rotateY(0deg); } to { transform: rotateY(-360deg); } }
+
+    /* Articles scroller */
+    .articles{ position:relative; display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:8px; }
+    .articles .viewport{ position:relative; overflow:hidden; }
+    .articles .track{ display:flex; gap:16px; padding:6px 0;  will-change: transform; transition: transform .45s ease;  will-change: transform; transition: transform .45s ease; }
+    .articles .article-card{ min-width: 320px; max-width: 420px; }
+    .articles .arrow{ display:grid; place-items:center; width:40px; height:40px; border-radius:999px; border:1px solid var(--border);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 94%, transparent) 0%, var(--panel) 100%);
+      box-shadow: var(--shadow); cursor:pointer; user-select:none; color:#fff; font-weight:700; font-size:18px; }
+    .articles .arrow:hover{ border-color:#93c5fd; box-shadow:0 10px 30px rgba(147,197,253,.25); }
+    @media (max-width: 640px){ .articles .article-card{ min-width: 280px; } }
+
+    /* Pseudo-ComfyUI */
+    #demo .toolbar{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px }
+    #demo .workspace{ position:relative; height: clamp(520px, 60vw, 660px); border:1px solid var(--border); border-radius:16px; overflow:hidden;
+      background: repeating-linear-gradient(0deg, #253043 0, #253043 1px, transparent 1px, transparent 32px),
+                  repeating-linear-gradient(90deg, #253043 0, #253043 1px, transparent 1px, transparent 32px),
+                  #151b24; box-shadow: var(--shadow); user-select:none; touch-action:none; }
+    #demo .edges{ position:absolute; inset:0; pointer-events:none; }
+    #demo .node{ position:absolute; min-width: 220px; max-width:320px; background: linear-gradient(180deg, #171d26, #131820); border:1px solid #223042; border-radius:14px; box-shadow: var(--shadow); padding: 10px; cursor: grab; transform: translateZ(0); }
+    #demo .node:active{ cursor:grabbing }
+    #demo .title{ font-size:13px; font-weight:700; margin-bottom:6px; display:flex; gap:8px; align-items:center; color:#fff; text-shadow:0 1px 0 rgba(0,0,0,.25) }
+    #demo .ports{ display:flex; gap:10px; flex-wrap:wrap; align-items:center }
+    #demo .port{ display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); background:#0f141b; border:1px solid #263244; padding:6px 8px; border-radius:10px; cursor:pointer }
+    #demo .port .dot{ width:12px; height:12px; border-radius:50%; border:1px solid #0b82b6; box-shadow: 0 0 0 2px rgba(14,165,233,.2); }
+    #demo .port[data-dir="in"] .dot{ border-color:#5b2bd6; box-shadow: 0 0 0 2px rgba(124,58,237,.25); }
+    #demo .port.can-connect{ outline:2px solid #2563eb; outline-offset:2px; box-shadow: 0 0 0 3px rgba(37,99,235,.25) inset; }
+    #demo .port.active{ outline:2px dashed var(--accent); outline-offset:2px }
+    #demo .node .body{ margin-top:6px; font-size:12px; color:var(--muted) }
+    #demo .node.save .preview{ margin-top:8px; border-radius:10px; overflow:hidden; border:1px solid #283344; display:none }
+    #demo .node.save .preview img{ width:100%; height:auto; display:block }
+    #demo .progress{ position:absolute; left:0; right:0; bottom: -6px; height: 6px; background:#0f141b; border-top:1px solid #263244 }
+    #demo .progress > i{ display:block; height:100%; width:0%; background:linear-gradient(90deg, var(--accent), #7c3aed); transition: width .12s ease }
+    .t-model .dot{ background:#f59e0b } .t-clip .dot{ background:#22d3ee } .t-cond .dot{ background:#22c55e } .t-neg .dot{ background:#ef4444 }
+    .t-latent .dot{ background:#e879f9 } .t-vae .dot{ background:#8b5cf6 } .t-image .dot{ background:#60a5fa }
+    #demo .cta{ display:none; margin-top:10px; padding:8px; border:1px solid #284055; border-radius:10px; background:#0f141b; color:#dbe7f3; font-size:13px; }
+    #demo .cta a{ color:#93c5fd; text-decoration:none; margin-right:10px } #demo .cta a:hover{ text-decoration:underline }
+    @media (max-width: 820px){ #demo .workspace{ height: clamp(540px, 110vw, 760px); } #demo .node{ min-width: 200px; max-width: 260px; border-radius:12px; padding:8px } #demo .title{ font-size:12px } #demo .port{ padding:5px 6px; font-size:11px } #demo .port .dot{ width:10px; height:10px } #demo .node .body{ font-size:11px } }
+    @media (max-width: 560px){ #demo .workspace{ height: clamp(560px, 130vw, 800px); } #demo .node{ min-width: 180px; max-width: 220px; border-radius:10px; padding:6px } #demo .title{ font-size:11px } #demo .port{ padding:4px 6px; font-size:10px } #demo .port .dot{ width:9px; height:9px } #demo .node .body{ font-size:10px } }
+
+    .footer { border-top:1px solid var(--border); padding: 24px 0; color: var(--muted); font-size: 14px; }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+  
+@media (max-width: 640px){
+  header nav{ flex-wrap: wrap; gap:12px; }
+  header nav .spacer{ display:none; }
+  header nav .btn.primary{ order:3; width:100%; justify-content:center; }
+  header nav .brand{ order:0; }
+  header nav a.btn{ order:1; }
+}
+
+/* Текст - подсказка для ComfyUI */
+
+#ws{ position: relative; } /* если уже есть — второй раз не добавляйте */
+
+#ws .ws-hint{
+  position: absolute;
+  left: 50%;
+  bottom: 2px;                 /* «в пару пикселей» от низа */
+  transform: translateX(-50%);
+  z-index: 5;
+  pointer-events: none;         /* не мешает drag’n’drop внутри канваса */
+
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 800;
+  color: #fff;
+  font-size: clamp(12px, 2.6vw, 15px);
+  letter-spacing: .2px;
+
+  background: linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,.26));
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 8px 22px rgba(0,0,0,.35);
+
+  opacity: .96;
+  transition: opacity .25s ease, transform .25s ease;
+}
+#ws .ws-hint.hide{
+  opacity: 0;
+  transform: translateX(-50%) translateY(4px);
+}
+
+/* Articles spacing + smaller text + hide scrollbar */
+   .articles .article-card.card.tile{ padding:16px 22px; }
+   .articles .article-card h3{ font-size:16px; line-height:1.25; }
+   .articles .article-card .meta{ font-size:14px; }
+   .articles .viewport{ -ms-overflow-style:none; scrollbar-width:none; }
+   .articles .viewport::-webkit-scrollbar{ display:none; }
+@media (max-width: 640px){
+  .articles .article-card.card.tile{ padding:14px 18px; }
+  .articles .article-card h3{ font-size:14px; }
+  .articles .article-card .meta{ font-size:11.5px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Основная автономная секция */
+.pipeline-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1400px; /* Вернули ширину, раз блоков стало 6 в ряд */
+    margin: 0 auto;
+    font-family: 'Inter', -apple-system, sans-serif;
+    /* Если фон сайта не темный, раскомментируй строку ниже: */
+    /* background-color: #0e0e0e; */
+}
+
+/* Контейнер-сетка: 3 колонки, 2 ряда */
+.pipeline-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Три ровные колонки */
+    gap: 80px 40px;                        /* 80px между рядами, 40px между колонками */
+    width: 100%;
+    padding: 60px 0;
+}
+
+/* Направляющая линия для ПЕРВОГО ряда (Этапы 1-3) */
+.pipeline-container::before {
+    content: '';
+    position: absolute;
+    /* Тёмно-серая линия */
+    background-color: #333; 
+    
+    /* SVG Стрелка, направленная вправо, в конце линии */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M0 0l10 5-10 5z' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    /* Стрелка прижата к правому краю линии, по центру */
+    background-position: right center; 
+    background-size: 10px 10px; /* Размер стрелки */
+
+    top: 155px; /* Под заголовками первого ряда */
+    
+    /* Линия начинается от 1 этапа и заканчивается ПЕРЕД 3 этапом */
+    left: 10%; 
+    right: 25%; /* Увеличили отступ справа, чтобы стрелка была слева от 3 блока */
+    
+    height: 2px;
+    z-index: 1;
+}
+
+/* Направляющая линия для ВТОРОГО ряда (Этапы 4-6) */
+.pipeline-container::after {
+    content: '';
+    position: absolute;
+    /* Тот же цвет и та же SVG стрелка */
+    background-color: #333; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M0 0l10 5-10 5z' fill='%23333'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 10px 10px;
+
+    /* Твоя точная правка по высоте второго ряда */
+    top: 480px; 
+    
+    /* Линия начинается от 4 этапа и заканчивается ПЕРЕД 6 этапом */
+    left: 10%;
+    right: 25%; /* Тот же отступ справа для симметрии */
+    
+    height: 2px;
+    z-index: 1;
+}
+
+/* Настройка самой карточки blueprint (восстановлены стили) */
+.blueprint {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 320px; /* Увеличили ширину, раз места больше */
+    z-index: 2; /* Поверх линии */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    justify-self: center; /* Центрируем карточку в ячейке сетки */
+}
+
+.blueprint.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Верхний блок с этапом (Восстановлено) */
+.blueprint-header {
+    background: #1a1a1a; /* Фон карточки */
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    color: #a0a0a0;
+    transition: 0.3s ease;
+}
+
+/* Основное тело карточки (Восстановлено) */
+.blueprint-body {
+    background: #1a1a1a;
+    padding: 25px; /* Чуть просторнее паддинги */
+    border-radius: 12px;
+    width: 100%;
+    min-height: 200px; /* Увеличили высоту для простора */
+    border: 1px solid #333;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6); /* Чуть мощнее тень */
+    transition: 0.3s ease;
+}
+
+.blueprint-body h4 {
+    margin: 0;
+    font-size: 16px; /* Увеличили заголовок */
+    line-height: 1.3;
+    color: #e0e0e0;
+}
+
+.blueprint-body p {
+    margin: 0;
+    font-size: 13px; /* Увеличили текст описания */
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* Список инструментов внизу */
+.software-list {
+    margin-top: auto;
+    font-size: 11px;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    border-top: 1px solid #2a2a2a;
+    padding-top: 12px;
+}
+
+/* Градиентная подсветка при наведении */
+.blueprint:hover .blueprint-header,
+.blueprint:hover .blueprint-body {
+    border-color: transparent;
+    background-image: linear-gradient(#1a1a1a, #1a1a1a), 
+                      linear-gradient(135deg, #ffb1da, #1e45ff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 0 30px rgba(30, 69, 255, 0.25);
+}
+
+.blueprint:hover .blueprint-header {
+    color: #ffb1da;
+}
+
+/* Цветной бейдж */
+.extra-badge {
+    font-size: 11px;
+    color: #ffb1da;
+    background: rgba(255, 177, 218, 0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    align-self: flex-start;
+}
+
+/* Адаптив для мобилок */
+@media (max-width: 1024px) {
+    .pipeline-container {
+        grid-template-columns: 1fr; /* Одна колонка */
+        gap: 50px;
+    }
+    /* Прячем горизонтальную линию и стрелку на мобилках */
+    .pipeline-container::before,
+    .pipeline-container::after {
+        display: none;
+    }
+}
+
+        /* КНОПКА СКАЧИВАНИЯ */
+        /* Используем длинный селектор для максимального приоритета */
+section.pipeline-section .blueprint-action-wrapper {
+    transform: translateY(20px);
+    position: relative;
+    z-index: 10;
+    transition: all 0.8s ease 0.5s;
+    text-align: center;
+    display: block !important;
+}
+
+section.pipeline-section .blueprint-action-wrapper.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Наша кнопка теперь называется .blueprint-trigger */
+.blueprint-trigger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 35px;
+    
+    /* Проверь, чтобы эти переменные были в :root, либо замени на HEX цвета для теста */
+    background-color: #1a1a1a !important; 
+    color: #e0e0e0 !important;
+    
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 50px;
+    border: 1px solid #333 !important;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+}
+
+/* Эффект при наведении */
+.blueprint-trigger:hover {
+    transform: scale(1.05);
+    border: 1px solid transparent !important;
+    
+    /* Магия градиентной рамки */
+    background-image: linear-gradient(#1a1a1a, #1a1a1a), 
+                      linear-gradient(135deg, #ffb1da, #1e45ff) !important;
+    background-origin: border-box !important;
+    background-clip: padding-box, border-box !important;
+    
+    box-shadow: 0 10px 30px rgba(30, 69, 255, 0.3);
+}
+
+        @media (max-width: 480px) {
+            .blueprint-trigger { justify-content: center; }
+        }
+
+
+.blueprint-trigger:hover {
+    filter: brightness(1.2);
+}
+
+/* Анимация для смайлика или иконки внутри кнопки */
+.blueprint-trigger:hover::before {
+    display: inline-block;
+    content: "📥"; /* Твой смайлик */
+    margin-right: 8px;
+    animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-3px); }
+}
+
+
+
+
+/* ── Game Overlay ────────────────────────────────────── */
+    #cat-game-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 8, 20, 0.92);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    #cat-game-overlay.visible { display: flex; }
+
+    #cat-game-wrapper {
+      width: 100%;
+      max-width: 820px;
+      padding: 0 12px;
+      position: relative;
+    }
+
+    /* Phaser canvas fills wrapper */
+    #cat-game canvas {
+      display: block;
+      width: 100% !important;
+      height: auto !important;
+      border-radius: 4px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.8), 0 0 80px rgba(100,160,255,0.12);
+    }
+
+    /* ── Easter Egg Trigger ──────────────────────────────── */
+    /* Place this button ANYWHERE on your site.             */
+    /* Make it blend in — change styles to suit your design */
+    #cat-egg-trigger {
+      position: fixed;
+      bottom: 10px;
+      right: 14px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 11px;
+      color: #444;
+      opacity: 0.1;
+      transition: opacity 0.4s;
+      padding: 8px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #cat-egg-trigger:hover { opacity: 0.5; }
+
+    
+
+
+
+
+
+
+/* === Services (hover-preview list) === */
+    #services { margin-top: 42px; }
+    #services h2 { color:#fff; margin: 0 0 16px; font-size: clamp(22px, 3.6vw, 28px); }
+    .srv-wrap { position: relative; border:1px solid var(--border); border-radius:16px; background: var(--panel); box-shadow: var(--shadow); overflow: hidden; } /* overflow: hidden; */
+    .srv-list { display:flex; flex-direction:column; }
+    .srv-item { position: relative; padding: 18px 20px; border-bottom:1px solid var(--border); color:#dbe7f3; cursor: pointer; transition: background 0.2s ease;}
+    .srv-item:last-child { border-bottom: none; }
+    .srv-item:hover { background: rgba(147,197,253,.06); }
+    .srv-item .kicker { font-size: 17px; color: var(--muted); letter-spacing:.2px; margin-right:8px; }
+    .srv-item .title { font-size: clamp(17px, 2.4vw, 17px); font-weight:600; }
+    .srv-preview { position:absolute; inset:auto auto 0 0; pointer-events:none; transform: translate(-50%, -50%) scale(.96); opacity:0; transition: opacity .18s ease, transform .18s ease; z-index: 10; }
+    
+/* Рендерим медиa с сохранением пропорций, без жёстких fixed-рамок */
+    .srv-preview img,
+    .srv-preview video{ display:block; width:auto; height:auto; max-width: clamp(280px, 44vw, 560px); /* не шире контейнера/экрана */
+  max-height: clamp(180px, 50vh, 420px);/* не выше контейнера/экрана */
+  object-fit: contain;                  /* на случай, если зададите width/height скриптом */
+}
+
+
+    .srv-preview.show { opacity:1; transform: translate(-50%, -50%) scale(1); }
+    @media (max-width: 640px){
+      .srv-item { padding: 16px 16px; }
+      .srv-preview img { width: min(86vw, 440px); max-height: 300px; }
+    }
+/* === Lifestyle links === */
+#lifestyle { margin-top: 42px; }
+#lifestyle h2 { color:#fff; margin: 0 0 16px; font-size: clamp(22px, 3.6vw, 28px); }
+
+/* Сетка кнопок: авто-подбор колонок, чтобы ничего не наезжало */
+.ls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 6px;
+}
+
+/* Немного уже и компактнее, чем обычные кнопки */
+.btn.sm { padding: .55rem .8rem; font-size: 18px; }
+.ls-grid a.btn { width: 70%; justify-content: center; text-align: center; }
+
+/* Глобальная плавная прокрутка (по желанию) */
+html { scroll-behavior: smooth; }
+
+/* Высота шапки + небольшой зазор */
+:root {
+  --navH: 100px;         /* ваша шапка */
+  --anchor-gap: 16px;   /* запас сверху */
+}
+
+/* Отступ при прокрутке к секциям-целям */
+#work, #services, #demo, #lifestyle {
+  scroll-margin-top: calc(var(--navH) + var(--anchor-gap));
+}
+
+/* На очень узких экранах шапка часто выше — увеличим offset */
+@media (max-width: 640px){
+  :root { --navH: 100px; }
+}
+
+
+
+
+
+
+
+/* Кнопка управления погодой */
+.weather-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 84px; /* На 60px выше, чем кнопка "Наверх" (24+60) */
+  width: 48px;
+  height: 48px;
+  z-index: 100;
+  cursor: pointer;
+  border: 1px solid #93c5fd;
+  background: linear-gradient(180deg, rgba(147,197,253,.22), rgba(147,197,253,.10));
+  box-shadow: 0 10px 30px rgba(147,197,253,.25);
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+/* Внутренняя темная плитка (как у #toTop) */
+.weather-btn::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, .45);
+  z-index: 0;
+}
+
+.weather-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Иконка Play */
+.play-icon {
+  width: 18px;
+  height: 18px;
+  color: #fff;
+  transition: opacity 0.3s ease;
+}
+
+/* Зеленый крутящийся полукруг */
+.spinner-ring {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 2px solid transparent;
+  border-top: 2px solid #38a861; /* Зеленый цвет */
+  border-radius: 50%;
+  animation: weather-spin 2s linear infinite;
+}
+
+@keyframes weather-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Состояние: ВЫКЛЮЧЕНО */
+.weather-btn.is-off {
+  opacity: 0.4;
+  filter: grayscale(1);
+  box-shadow: none;
+}
+
+.weather-btn.is-off .spinner-ring {
+  display: none; /* Прячем кольцо при выключении */
+}
+
+/* Ховеры */
+.weather-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(147,197,253,.35), rgba(147,197,253,.15));
+}
+
+@media (max-width: 640px) {
+  .weather-btn { right: 14px; bottom: 68px; width: 44px; height: 44px; }
+}
+
+
+
+
+
+/* Кнопка «вверх» */
+#toTop {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+#toTop.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+/* Небольшая кнопка, чтобы не перекрывать контент */
+#toTop.btn { padding: .5rem .7rem; font-size: 14px; }
+@media (max-width: 640px){
+  #toTop { right: 14px; bottom: 16px; }
+}
+
+/* Плавная прокрутка (если ещё не включали) */
+html { scroll-behavior: smooth; }
+/* ↑ Кнопка "вверх": светлее по умолчанию и крупнее */
+#toTop.btn{
+  /* размер/форм-фактор */
+  width: 48px;           /* сделаем нажатие удобным (>=44px) */
+  height: 48px;
+  padding: 0;            /* т.к. фиксируем ширину/высоту */
+  font-size: 18px;       /* стрелка крупнее */
+  border-radius: 999px;  /* круглая кнопка */
+
+  /* визуал (светлее, чем обычный .btn) */
+  border-color: #93c5fd; 
+  background: linear-gradient(180deg, rgba(147,197,253,.22), rgba(147,197,253,.10));
+  box-shadow: 0 10px 30px rgba(147,197,253,.25);
+  color: #fff;
+}
+
+/* hover/active — в едином стиле с меню, но чуть заметнее */
+#toTop.btn:hover{
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  background: linear-gradient(180deg, rgba(147,197,253,.35), rgba(147,197,253,.15));
+  box-shadow: 0 14px 36px rgba(147,197,253,.32);
+}
+#toTop.btn:active{
+  transform: translateY(0);
+}
+
+/* На очень узких экранах — каплю компактнее */
+@media (max-width: 640px){
+  #toTop.btn{ width: 44px; height: 44px; font-size: 16px; }
+}
+#toTop.btn{
+  padding: .70rem 1rem;      /* вместо width/height */
+  font-size: 19px;
+  border-radius: 12px;       /* как у остальных кнопок */
+}
+#toTop.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+/* делаем слой-подложку внутри кнопки, только под иконкой */
+#toTop.btn{
+  position: fixed;              /* как и было */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;             /* чтобы внутренняя плитка была обрезана по радиусу */
+}
+
+/* внутренняя тёмная плитка позади стрелки */
+#toTop.btn::after{
+  content: "";
+  position: absolute;
+  inset: 6px;                   /* отступы от краёв кнопки; меньше = плитка больше */
+  border-radius: 10px;          /* повторяет скругление внутри */
+  background: rgba(0, 0, 0, .45);      /* темнота под стрелкой */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    inset 0 -10px 18px rgba(0,0,0,.35);
+  z-index: 0;
+}
+
+/* сама иконка поверх */
+#toTop .icon{ position: relative; z-index: 1; display:block; }
+
+/* делаем стрелку толще */
+#toTop .icon path{
+  stroke: currentColor;
+  stroke-width: 3.2;            /* было 2 — увеличили «жирность» */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* если stroke-width из SVG не переопределяется — удалите его из SVG или добавьте !important */
+
+#toTop .icon{ display:block; }
+
+:root { --h2-size: clamp(22px, 3.6vw, 28px); }
+
+#services h2,
+#lifestyle h2,            /* или #links h2, если переименуете блок */
+#demo .section-title,
+#work .title-underlay {
+  font-size: var(--h2-size);
+}
+
+
+/* --- Блок "Мои хобби" --- */
+#hobbies { position: relative; }
+
+/* сами правила .photo-stack — margin:auto уже у тебя есть, дублирую для надёжности */
+.photo-stack {
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  --stack-w: clamp(320px, 40vw, 680px);
+  width: var(--stack-w);
+  --card-w: var(--stack-w);
+  --card-h: calc(var(--card-w) * 9 / 16);
+  --max-h: calc(100vh - 220px);
+  height: min(calc(var(--card-h) * 1.05), var(--max-h));
+  perspective: 1200px;
+  touch-action: pan-y;
+  user-select: none;
+  overflow: visible;
+}
+
+/* базовая карточка (landscape) */
+.photo-stack .card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--panel);
+  box-shadow: 0 18px 40px rgba(2,6,18,0.6);
+  transition: transform 420ms cubic-bezier(.2,.9,.25,1), opacity 380ms ease, top 420ms ease;
+  z-index: 1;
+}
+
+/* Контент в карточке - фото (заполняют карточку) */
+.photo-stack .card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* фото заполняют карточку (выровнять кадр) */
+  background: var(--panel);
+}
+
+/* portrait: такая же высота, но уже по ширине, и по центру стопки */
+.photo-stack .card.portrait {
+  height: var(--card-h);
+  left: 50%;                 /* центрируем по центру стопки */
+  transform: translateX(-50%);
+  width: calc(var(--card-h) * 9 / 16); /* ширина по пропорции 9:16 (можно поправить) */
+  max-width: 54%;            /* страховая защита на мобилках */
+}
+
+/* видео в portrait: показываем весь кадр по высоте */
+.photo-stack .card.portrait video {
+  display: block;
+  height: 100%;
+  width: auto;
+  margin: 0 auto;
+  object-fit: cover; /* cover — делает кадр плотным, если хочешь whole-frame — ставь contain */
+  background: transparent;
+}
+
+/* Если вдруг есть video в landscape-карточке (редко): пусть ведёт себя как cover */
+.photo-stack .card video:not(.portrait video) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Подсветка верхней карточки (как у тебя) */
+.photo-stack .card.top-glow {
+  box-shadow:
+    0 30px 60px rgba(2,6,18,0.65),
+    0 0 28px rgba(9,155,223,0.18),
+    0 0 8px rgba(14,165,233,0.25) inset;
+  outline: 1px solid rgba(14,165,233,0.18);
+  transition: box-shadow 260ms cubic-bezier(.2,.9,.25,1), outline 260ms ease;
+  z-index: 99;
+}
+
+/* если где-то inline-transform мешает — даём приоритет центровке (аккуратно) */
+.photo-stack, .photo-stack .card { left: auto; }
+
+.photo-stack .card.top-glow.dragging {
+  box-shadow:
+    0 36px 80px rgba(2,6,18,0.7),
+    0 0 40px rgba(8,156,225,0.28),
+    0 0 10px rgba(14,165,233,0.34) inset;
+  outline-color: rgba(14,165,233,0.26);
+}
+
+/* Клиновые мелочи */
+.card.flying-clone { pointer-events:none; border-radius:14px; box-shadow:0 30px 60px rgba(2,6,18,0.7); transform-origin:center center; }
+
+/* hint: оставляем как есть, но на всякий случай margin */
+.hobby-hint {
+  display: block;
+  width: auto; 
+  max-width: 80%;
+  margin: 20px auto 0;
+  text-align: center;
+  padding: 0;             /* Убираем внутренние отступы */
+  background: transparent; /* Убираем фон */
+  box-shadow: none;       /* Убираем ту самую тяжелую тень */
+  border: none;           /* Убираем границы */
+  
+  color: #94a3b8;         /* Делаем цвет чуть мягче (серо-голубой) */
+  font-size: 0.85rem;     /* Чуть уменьшаем размер */
+  font-style: italic;     /* Курсив подчеркнет, что это просто совет/подсказка */
+  opacity: 0.7;           /* Делаем её полупрозрачной, чтобы не отвлекала */
+  
+  position: relative;
+  z-index: 1200;
+}
+@media (max-width:480px){ .photo-stack{ --stack-w: min(320px,86vw); } .hobby-hint{ width: calc(var(--stack-w) - 12px);} }
+
+
+.hobby-hint.hidden{
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .22s ease, transform .22s ease;
+  pointer-events: none;
+}
+
+/* Подпись на изображении */
+.card-caption {
+  position: absolute;
+  bottom: 0; /* снизу карточки */
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.05)); /* чёрная плашка с 50% прозрачности */
+  color: #fff; /* белый текст */
+  text-align: center;
+  padding: 8px 0; /* отступы сверху/снизу */
+  font-size: 14px; /* размер текста */
+  font-weight: 500;
+}
+
+#hobbies .section-title {
+  font-size: var(--h2-size);  /* тот же размер, что у остальных секций */
+  margin: 0 0 14px;           /* общий нижний отступ */
+  letter-spacing: .2px;
+  font-weight: 700;
+  color: #fff;
+  text-align: left;           /* выравнивание по левому краю, как у других */
+}
+
+
+/* Тема сайта */
+body {
+  background: linear-gradient(180deg, #e9d8ff 0%, #cab8ff 25%, #a08bff 45%, #5b4ea3 65%, #1f2230 82%, #000000 100%); 
+}
+
+/* Кнопка DAK */
+#GameCatRunner {
+  background: #e4ad3e; /* зелёный при фиолетовой теме */
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 18px);
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+/* При наведении */
+#GameCatRunner:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 640px) {
+  header nav { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+  header nav::-webkit-scrollbar { display: none; }
+  header nav .btn, header nav .logo { font-size: 12px; padding: .45rem .65rem; white-space: nowrap; }
+  header nav .logo { font-size: 13px; }
+}
+
+
+
+
+
+
+
+/* CSS иконка терминала: Черный прямоугольник */
+.cmd-icon-css {
+  width: 18px;      /* Подберите размер, чтобы гармонично смотрелось с текстом */
+  height: 14px;
+  background-color: #000000; /* Чёрный фон */
+  border: 1px solid #444444; /* Тонкая серая рамка */
+  border-radius: 2px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-right: 6px; /* Отступ от заголовка */
+}
+
+/* Серая полоска вверху иконки */
+.cmd-icon-css::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px; /* Высота серой полоски */
+  background-color: #aaaaaa; /* Серый цвет полоски */
+}
+
+/* Текст "C:\." поверх иконки */
+.cmd-icon-text {
+  font-family: 'Consolas', 'Courier New', monospace; /* Моноширинный шрифт */
+  font-size: 8px; /* Очень маленький размер текста */
+  color: #ffffff; /* Белый текст */
+  font-weight: bold;
+  position: relative;
+  z-index: 1; /* Поверх серой полоски */
+  
+  /* Немного сдвинем текст, чтобы он был по центру */
+  transform: translateY(1px); 
+}
+
+/* 1. ВНЕШНЯЯ СЕКЦИЯ (Контейнер) */
+#terminal-section {
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 450px; /* Резервируем место, чтобы футер не прыгал */
+  background: transparent;
+}
+
+/* 2. ОКНО ТЕРМИНАЛА (Базовое состояние) */
+.terminal-window {
+  width: 100%;
+  max-width: 800px;
+  background-color: #000;
+  border: 1px solid #444;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  font-family: 'Consolas', 'Courier New', monospace;
+  color: #fff;
+  
+  /* Начальное состояние для анимации */
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Состояние при активации (добавляется через JS) */
+.terminal-window.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* 3. ШАПКА ОКНА (Windows Style) */
+.terminal-header {
+  background-color: #fff;
+  color: #000;
+  padding: 6px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  border-bottom: 1px solid #ccc;
+}
+
+.header-left { display: flex; align-items: center; gap: 8px; }
+.cmd-icon { width: 14px; height: 14px; opacity: 0.8; }
+
+.header-right { display: flex; gap: 15px; font-weight: bold; }
+.win-btn { cursor: pointer; padding: 0 4px; }
+.win-btn.close:hover { background: #e81123; color: #fff; }
+
+/* 4. ТЕЛО ТЕРМИНАЛА */
+.terminal-body {
+  padding: 20px;
+  min-height: 320px;
+  position: relative;
+}
+
+#typing-container p {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  font-size: 14px;
+  color: #00ff00; /* Классический зеленый цвет терминала для строк */
+}
+
+/* СПИННЕР (Исправленный, без конфликта с каруселью) */
+#terminal-section .spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #00ff00;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: terminal-loader 1s linear infinite;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+@keyframes terminal-loader {
+  to { transform: rotate(360deg); }
+}
+
+/* 5. ФОРМА ОБРАТНОЙ СВЯЗИ */
+.hidden-form {
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.hidden-form.show {
+  display: block;
+  opacity: 1;
+}
+
+.hidden-form h3 { margin-bottom: 20px; font-family: sans-serif; }
+
+.form-group { margin-bottom: 15px; }
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.form-input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: #0078d7;
+}
+
+
+/* Делаем текст кнопки белым и добавляем стиль Windows-кнопки */
+/* Кнопка в терминале: стандартное состояние */
+#terminal-section .btn.primary {
+  background-color: #000000;      /* Черный фон */
+  color: #ffffff !important;      /* Белый текст */
+  border: 1px solid #ffffff;      /* Белые края */
+  padding: 10px 25px;
+  font-family: 'Consolas', monospace; /* Сохраняем стиль шрифта */
+  cursor: pointer;
+  transition: all 0.3s ease;      /* Плавный переход для всех свойств */
+  text-transform: uppercase;      /* Можно добавить для строгости (опционально) */
+  font-weight: bold;
+}
+
+/* Кнопка в терминале: наведение и нажатие (hover/active) */
+#terminal-section .btn.primary:hover,
+#terminal-section .btn.primary:active {
+  background-color: #ffffff;      /* Становится белым при наведении */
+  color: #000000 !important;      /* Текст становится черным */
+  border-color: #ffffff;          /* Края остаются белыми (сливаются с фоном) */
+}
+
+/* Принудительно правим цвет текста внутри span, если он есть */
+#terminal-section .btn.primary:hover .lang-txt-btn {
+  color: #000000;
+}
+
+#typing-container span[style*="color: #ff4d4d"] {
+    text-shadow: 0 0 8px rgba(255, 77, 77, 0.6);
+}
+
+
+/* Падающий снег зимой или листья осенью */
+#weather-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block; /* Убеждаемся, что он не hidden */
+  background: transparent;
+  /* МАГИЯ СЛОЕВ: */
+  z-index: 0; 
+  /* Чтобы клики по тексту и кнопкам работали: */
+  pointer-events: none; 
+}
+
+
+
+
+
+
+
+/* Контейнер гирлянды */
+.garland-container {
+    position: absolute;
+    bottom: -13px; /* Прижимаем к нижней границе хедера */
+    left: 0;
+    width: 100%;
+    height: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    pointer-events: none; /* Чтобы не мешала кликам по меню */
+    z-index: 60;
+}
+
+/* Провод — неровная линия через SVG filter или просто тонкая линия */
+.garland-container::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #111;
+    /* Небольшая "волнистость" провода */
+    border-radius: 50% 50% 0 0;
+    box-shadow: 0 1px 1px rgba(255,255,255,0.1);
+}
+
+/* Общий стиль лампочки */
+.garland-light {
+    position: relative;
+    width: 8px;
+    height: 12px;
+    border-radius: 50% 50% 40% 40%;
+    background: #333; /* Выключенная лампочка */
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Основание лампочки (черный прямоугольник) */
+.garland-light::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    width: 6px;
+    height: 4px;
+    background: #111;
+    border-radius: 1px;
+}
+
+/* Делим лампочки на группы по 3 */
+
+/* 1. БЕЛЫЕ (каждая первая в тройке) */
+.garland-light:nth-child(3n+1) {
+    animation: glow-white 3s infinite step-end;
+}
+
+/* 2. КРАСНЫЕ (каждая вторая в тройке) */
+.garland-light:nth-child(3n+2) {
+    animation: glow-red 3s infinite step-end;
+    animation-delay: 1s; /* Ждет, пока прогорит белая */
+}
+
+/* 3. СИНИЕ (каждая третья в тройке) */
+.garland-light:nth-child(3n+3) {
+    animation: glow-blue 3s infinite step-end;
+    animation-delay: 2s; /* Ждет белую и красную */
+}
+
+/* --- АНИМАЦИИ СВЕЧЕНИЯ --- */
+
+/* Белый свет (теплый белый) */
+@keyframes glow-white {
+    0%, 100% { background: #333; box-shadow: none; }
+    33.3% { 
+        background: #fff; 
+        box-shadow: 0 0 12px #fff, 0 0 20px rgba(255, 255, 255, 0.4); 
+    }
+}
+
+/* Красный свет */
+@keyframes glow-red {
+    0%, 100% { background: #333; box-shadow: none; }
+    33.3% { 
+        background: #ff4d4d; 
+        box-shadow: 0 0 12px #ff4d4d, 0 0 20px rgba(255, 77, 77, 0.5); 
+    }
+}
+
+/* Синий свет */
+@keyframes glow-blue {
+    0%, 100% { background: #333; box-shadow: none; }
+    33.3% { 
+        background: #4d94ff; 
+        box-shadow: 0 0 12px #4d94ff, 0 0 20px rgba(77, 148, 255, 0.5); 
+    }
+}
+
+/* Адаптив для маленьких экранов — уменьшаем количество лампочек через скрытие */
+@media (max-width: 640px) {
+    .garland-light:nth-child(n+10) { display: none; }
+}
+
+
+
+
+/* 6. АДАПТИВНОСТЬ */
+@media (max-width: 600px) {
+  #terminal-section { padding: 40px 10px; min-height: 500px; }
+  #typing-container p { font-size: 12px; }
+  .terminal-header { font-size: 11px; }
+}
