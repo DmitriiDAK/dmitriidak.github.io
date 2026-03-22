@@ -63,7 +63,7 @@
   }
   function graphValid(){ return ( hasEdge('n-checkpoint','model','n-ksampler','model') && hasEdge('n-checkpoint','clip','n-pos','clip') && hasEdge('n-checkpoint','clip','n-neg','clip') && hasEdge('n-pos','pos','n-ksampler','pos') && hasEdge('n-neg','neg','n-ksampler','neg') && hasEdge('n-size','latent','n-ksampler','latent') && hasEdge('n-checkpoint','vae','n-vae','vae') && hasEdge('n-ksampler','out_latent','n-vae','samples') && hasEdge('n-vae','image','n-save','image') ); }
 
-  runBtn.addEventListener('click', function(){ if(!graphValid()){ runBtn.animate([{transform:'translateY(0)'},{transform:'translateY(-3px)'},{transform:'translateY(0)'}],{duration:260}); return; } preview.style.display = 'none'; cta.style.display = 'none'; bar.style.width = '0%'; var t = 0; var timer = setInterval(function(){ t += Math.random()*18+6; if(t>=100){t=100; clearInterval(timer);} bar.style.width = t+'%'; if(t===100){ var img=preview.querySelector('img'); img.src='assets/Cat.png';
+  runBtn.addEventListener('click', function(){ if(!graphValid()){ runBtn.animate([{transform:'translateY(0)'},{transform:'translateY(-3px)'},{transform:'translateY(0)'}],{duration:260}); return; } preview.style.display = 'none'; cta.style.display = 'none'; bar.style.width = '0%'; var t = 0; var timer = setInterval(function(){ t += Math.random()*18+6; if(t>=100){t=100; clearInterval(timer);} bar.style.width = t+'%'; if(t===100){ var img=preview.querySelector('img'); img.src='assets/cat.png';
 ; preview.style.display='block'; cta.style.display='block'; } }, 160); });
 
   // --- Mobile-only left align (AFTER ws is defined) ---
