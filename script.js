@@ -1058,7 +1058,22 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     this.reset();
 });
 
+document.getElementById('mailLink').addEventListener('click', function(e){
+    e.preventDefault(); // Отменяем переход по пустой ссылке #
 
+    // Расшифровываем основную почту из атрибута data-m
+    var m = atob(this.getAttribute('data-m'));
+    
+    // Пытаемся открыть почтовый клиент
+    window.location.href = m;
+
+    // Резервный вариант (Gmail), тоже зашифрован
+    var backup = atob('aHR0cHM6Ly9tYWlsLmdvb2dsZS5jb20vbWFpbC8/dmlldz1jbSZmcz0xJnRvPW1yZGFrMDk2QGdtYWlsLmNvbQ==');
+    
+    setTimeout(function(){
+      window.open(backup, '_blank', 'noopener');
+    }, 500);
+  });
 
 /* ── Language toggle EN / RU ── */
 (function () {
@@ -1265,6 +1280,19 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
       }
     }
   });
+
+  /* ─── НОВЫЙ БЛОК: Смена ссылки на PDF ─── */
+  var cvLink = document.getElementById('cvLink');
+  if (cvLink) {
+    // Если ru — cv.pdf, если en — cv1.pdf
+    cvLink.href = (newLang === 'ru') ? 'assets/cv.pdf' : 'assets/cveng.pdf';
+  }
+  var roadmapLink = document.getElementById('roadmapLink');
+  if (roadmapLink) {
+     roadmapLink.href = (newLang === 'ru') ? 'assets/DMITRIIDAK.pdf' : 'assets/DMITRIIDAKENG.pdf';
+  }
+  /* ────────────────────────────────────── */
+
   document.documentElement.lang = newLang;
   var btn = document.getElementById('langToggle');
   if (btn) btn.textContent = newLang === 'ru' ? 'EN' : 'RU';

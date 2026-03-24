@@ -55,7 +55,7 @@
         </div>
         <div class="cta">
           <a class="btn primary js-mail" href="#" data-mail="bXJkYWswOTZAZ21haWwuY29t">Записаться на разбор пайплайна</a>
-          <a class="btn" href="assets/cv.pdf" target="_blank" rel="noopener">Скачать резюме (PDF)</a>
+          <a id="cvLink" class="btn" href="assets/cv.pdf" target="_blank" rel="noopener">Скачать резюме (PDF)</a>
         </div>
       </div>
       <div class="avatar card" aria-hidden="true">
@@ -219,7 +219,7 @@
   </div>
 
   <div class="blueprint-action-wrapper">
-      <a href="assets/DMITRIIDAK.pdf" download class="blueprint-trigger">
+      <a id="roadmapLink" href="assets/DMITRIIDAK.pdf" download class="blueprint-trigger">
           <span class="btn-text">Скачать Технический Roadmap (PDF)</span>
       </a>
   </div>
@@ -306,7 +306,7 @@
           <div class="cta" id="cta">
             <span class="cta-text">Помогу собрать ваш реальный пайплайн за 1–2 недели. </span>
             <a class="btn" href="https://t.me/dmitry_starlord" target="_blank" rel="noopener">Telegram</a> 
-            <a class="btn" id="mailLink" href="mailto:dmitriidak@gmail.com">Email</a> 
+            <a class="btn" id="mailLink" href="#" data-m="bWFpbHRvOmRtaXRyaWlkYWtAZ21haWwuY29t">Email</a> 
             <a class="btn download-btn" href="assets/DAK_Workflow.zip" download="DAK_Workflow.zip" class="download-btn" target="_blank" rel="noopener">💾 <span class="dl-text">Скачать демо workflow</span></a> 
             <script>
               document.getElementById('mailLink').addEventListener('click', function(e){
