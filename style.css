@@ -912,6 +912,211 @@ body {
 
 
 
+
+
+
+
+
+
+.pet-labs-section {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 10px 0px;
+        box-sizing: border-box;
+    }
+
+    .section-title {
+        font-size: 2.0rem;
+        margin-bottom: 16px;
+        color: #ffffff;
+    }
+
+    .pet-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Центрируем карточки */
+        gap: 40px;
+    }
+
+    .pet-card {
+        flex: 0 1 450px; /* Ширина карточки */
+        display: flex;
+        flex-direction: column;
+        background-color: #000000;
+        border-radius: 24px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .pet-card:hover {
+        box-shadow: none;
+        transform: translateY(-8px);
+        border-color: #7c3aed;
+    }
+
+    /* ИЗМЕНЕНИЕ: Уменьшенная высота обложки */
+    .pet-image-wrap {
+        width: 100%;
+        height: 250px; /* Фиксированная небольшая высота */
+        overflow: hidden;
+        background: #1a102a;
+    }
+
+    .pet-image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Квадратная обложка красиво заполнит этот прямоугольник */
+        transition: transform 0.6s ease;
+    }
+
+    .pet-info {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .pet-name {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: #fff;
+    }
+
+    .pet-desc {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #ffffff;
+        margin-bottom: 25px;
+    }
+
+    /* Кнопка и ссылки */
+    /* Контейнер для иконок — жестко в ряд, без вариантов */
+    .pet-links {
+      display: flex !important; /* Форсируем флекс */
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      gap: 15px !important;
+      margin: 0 0 25px 0 !important;
+      padding: 0 !important;
+      justify-content: flex-start !important;
+      position: relative !important; /* Отменяем возможный absolute от других стилей */
+      width: auto !important;
+      height: auto !important;
+    }
+
+    /* Сами иконки-ссылки */
+    .service-icon {
+      display: block !important;
+      position: relative !important; /* Убираем наслоение */
+      width: 32px !important;
+      height: 32px !important;
+      margin: 0 !important;
+      left: auto !important; /* Сбрасываем координаты, если они прилетели от нод */
+      top: auto !important;
+      transition: transform 0.2s ease, filter 0.2s ease !important;
+      filter: grayscale(1) brightness(0.8);
+    }
+
+    .service-icon:hover {
+      filter: grayscale(0) brightness(1);
+      transform: scale(1.2);
+    }
+
+    .service-icon img {
+       width: 32px !important;
+       height: 32px !important;
+       display: block !important;
+       pointer-events: none; /* Чтобы клик шел по ссылке, а не по картинке */
+    }
+
+    .service-icon:hover {
+        filter: grayscale(0) brightness(1);
+        transform: scale(1.2);
+    }
+
+    .btn-steam {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 20px;
+        background: rgba(124, 58, 237, 0.1);
+        border: 1px solid #ffffff;
+        border-radius: 14px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+        margin-bottom: 25px;
+    }
+
+    .btn-steam:hover {
+        background: #ffffff;
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+        color: #000000;
+    }
+
+    /* Прогресс-бар */
+    .progress-wrapper {
+        position: relative;
+        margin-top: auto;
+        padding-top: 25px;
+    }
+
+    .progress-label {
+        position: absolute;
+        top: 0;
+        font-size: 0.75rem;
+        color: #ffffff;
+        font-weight: bold;
+        transform: translateX(-50%);
+    }
+
+    .progress-container {
+        width: 100%;
+        height: 10px;
+        background: #000000;
+        border-radius: 20px;
+        border: 2px solid #ffffff;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: #ffffff;
+        border-radius: 20px;
+    }
+
+    @media (max-width: 500px) {
+        .pet-card { flex: 0 1 100%; }
+        .pet-image-wrap { height: 180px; }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* CSS иконка терминала: Черный прямоугольник */
 .cmd-icon-css {
   width: 18px;      /* Подберите размер, чтобы гармонично смотрелось с текстом */
