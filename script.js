@@ -2,13 +2,19 @@
   // Core refs
   var ws = document.getElementById('ws');
   var edgesSvg = document.getElementById('edges');
+
+  // ── CANVAS TRANSFORM STATE (pinch / pan / touch-drag) ──────────────────
+  var wsScale = 1.0;
+  var wsTx = 0, wsTy = 0;
+  var MIN_SCALE = 0.4, MAX_SCALE = 2.5;
+  var wsInner = null; // set in initWorkspaceInner()
   var runBtn = document.getElementById('runBtn');
   var bar = document.getElementById('bar');
   var preview = document.getElementById('preview');
   var cta = document.getElementById('cta');
 
   // SVG sizing
-  function resizeSvg(){ var r = ws.getBoundingClientRect(); edgesSvg.setAttribute('viewBox', '0 0 ' + r.width + ' ' + r.height); }
+  function resizeSvg(){ var r = ws.getBoundingClientRect(); edgesSvg.setAttribute('viewBox', '0 0 ' + r.width + ' ' + r.height); edgesSvg.setAttribute('width', r.width); edgesSvg.setAttribute('height', r.height); }
   window.addEventListener('resize', function(){ resizeSvg(); updateEdges(); if (!userMoved && mqMobile.matches) alignNodesLeftMobile(12); layoutColumn2(); });
   resizeSvg();
 
@@ -17,21 +23,236 @@
   document.addEventListener('mousedown', function(e){
     var port = e.target.closest ? e.target.closest('.port') : null; if (port) return;
     var node = e.target.closest ? e.target.closest('#demo .node') : null; if(!node) return;
-    var rect = node.getBoundingClientRect(); var wsrect = ws.getBoundingClientRect();
-    dragging = { el: node, dx: e.clientX - rect.left, dy: e.clientY - rect.top, wsx: wsrect.left, wsy: wsrect.top };
+    // Store node start position in workspace-inner LOCAL coords + mouse start in screen coords
+    var nLeft = parseFloat(node.style.left) || node.offsetLeft;
+    var nTop  = parseFloat(node.style.top)  || node.offsetTop;
+    dragging = { el: node, snl: nLeft, snt: nTop, smx: e.clientX, smy: e.clientY };
     e.preventDefault();
   });
   document.addEventListener('mousemove', function(e){
     if(!dragging) return;
-    var x = e.clientX - dragging.wsx - dragging.dx;
-    var y = e.clientY - dragging.wsy - dragging.dy;
-    dragging.el.style.left = Math.max(8, x) + 'px';
-    dragging.el.style.top  = Math.max(8, y) + 'px';
+    // Convert screen delta to local coords by dividing by current scale
+    var x = dragging.snl + (e.clientX - dragging.smx) / wsScale;
+    var y = dragging.snt + (e.clientY - dragging.smy) / wsScale;
+    dragging.el.style.left = Math.max(0, x) + 'px';
+    dragging.el.style.top  = Math.max(0, y) + 'px';
     updateEdges();
   });
   document.addEventListener('mouseup', function(){ dragging=null; });
 
-  // Edges
+  // ── WORKSPACE-INNER: dynamic wrapper for pan/zoom transform ────────────
+  function initWorkspaceInner() {
+    wsInner = ws.querySelector('.workspace-inner');
+    if (!wsInner) {
+      wsInner = document.createElement('div');
+      wsInner.className = 'workspace-inner';
+      // Move nodes (not SVG, not ws-hint) into the inner wrapper
+      var toMove = Array.prototype.slice.call(ws.children).filter(function(el) {
+        return el.tagName !== 'svg' &&
+               !el.classList.contains('ws-hint') &&
+               !el.classList.contains('progress');
+      });
+      toMove.forEach(function(el) { wsInner.appendChild(el); });
+      // Гарантируем DOM-порядок: SVG (#edges) первым → wsInner вторым
+      var edgesSvg = ws.querySelector('#edges');
+      if (edgesSvg && edgesSvg.parentNode === ws) {
+        ws.insertBefore(edgesSvg, ws.firstChild); // SVG — первый
+      }
+      ws.insertBefore(wsInner, ws.children[1] || null); // wsInner — второй (после SVG)
+    }
+  }
+  initWorkspaceInner();
+
+  // ── TRANSFORM HELPERS ───────────────────────────────────────────────────
+  function applyWsTransform() {
+    wsInner.style.transform =
+      'translate(' + wsTx + 'px,' + wsTy + 'px) scale(' + wsScale + ')';
+    updateEdges();
+  }
+
+  function getTouchDist(t1, t2) {
+    var dx = t1.clientX - t2.clientX, dy = t1.clientY - t2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+  function clampVal(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  // ── TOUCH STATE ─────────────────────────────────────────────────────────
+  var tPinch  = null;  // {dist,scale,tx,ty,midX,midY}
+  var tPan    = null;  // {sx,sy,stx,sty}
+  var tDrag   = null;  // {el,snl,snt,stx,sty}
+  var lpTimer = null;
+  var tMoved  = false;
+
+  function clearLP() { if (lpTimer) { clearTimeout(lpTimer); lpTimer = null; } }
+
+  // ── TOUCHSTART ──────────────────────────────────────────────────────────
+  ws.addEventListener('touchstart', function(e) {
+    var T = e.touches;
+    if (T.length === 2) {
+      clearLP(); tPan = null;
+      var wr = ws.getBoundingClientRect();
+      tPinch = {
+        dist:  getTouchDist(T[0], T[1]),
+        scale: wsScale, tx: wsTx, ty: wsTy,
+        midX:  (T[0].clientX + T[1].clientX) / 2 - wr.left,
+        midY:  (T[0].clientY + T[1].clientY) / 2 - wr.top
+      };
+      e.preventDefault();
+      return;
+    }
+    if (T.length === 1) {
+      var t0 = T[0];
+      tMoved = false;
+      // ── ПОРТ: короткий тап → синтетический click ────────────────────────
+      var port = t0.target.closest ? t0.target.closest('#demo .port') : null;
+      if (port) {
+        // Запомним порт и координаты; проверим в touchend
+        window._tapPortTarget = port;
+        window._tapPortStart  = { x: t0.clientX, y: t0.clientY };
+        e.preventDefault();
+        return; // не запускаем long-press и pan для портов
+      }
+      // ─────────────────────────────────────────────────────────────────────
+      var node = t0.target.closest ? t0.target.closest('#demo .node') : null;
+      if (node) {
+        var nLeft = parseFloat(node.style.left) || node.offsetLeft;
+        var nTop  = parseFloat(node.style.top)  || node.offsetTop;
+        // Capture values for closure (t0 coords change with next touch events)
+        (function(capturedNode, capturedLeft, capturedTop, capturedX, capturedY) {
+          lpTimer = setTimeout(function() {
+            if (!tMoved) {
+              tDrag = { el: capturedNode, snl: capturedLeft, snt: capturedTop,
+                        stx: capturedX, sty: capturedY };
+              capturedNode.classList.add('lp-drag');
+              tPan = null; // stop panning while dragging
+            }
+          }, 1500);
+        })(node, nLeft, nTop, t0.clientX, t0.clientY);
+      }
+      // Если цель — кликабельный элемент (кнопка, ссылка) → не блокируем
+      var clickable = t0.target.closest ? (
+        t0.target.closest('a') || 
+        t0.target.closest('button') || 
+        t0.target.closest('input') || 
+        t0.target.closest('select')
+      ) : null;
+      if (clickable) return; // пропускаем — браузер обработает нативно
+
+      tPan = { sx: t0.clientX, sy: t0.clientY, stx: wsTx, sty: wsTy };
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // ── TOUCHMOVE ───────────────────────────────────────────────────────────
+  ws.addEventListener('touchmove', function(e) {
+    var T = e.touches;
+    if (T.length === 2 && tPinch) {
+      clearLP();
+      var dist = getTouchDist(T[0], T[1]);
+      var newScale = clampVal(tPinch.scale * (dist / tPinch.dist), MIN_SCALE, MAX_SCALE);
+      // Keep initial pinch midpoint stationary
+      var ratio = newScale / tPinch.scale;
+      wsTx = tPinch.midX - ratio * (tPinch.midX - tPinch.tx);
+      wsTy = tPinch.midY - ratio * (tPinch.midY - tPinch.ty);
+      wsScale = newScale;
+      applyWsTransform();
+      e.preventDefault();
+      return;
+    }
+    if (T.length === 1) {
+      var t0 = T[0];
+      // Если это был тап по порту и палец сдвинулся — отмена тапа, старт pan
+      if (window._tapPortTarget && window._tapPortStart) {
+        var pdx = Math.abs(t0.clientX - window._tapPortStart.x);
+        var pdy = Math.abs(t0.clientY - window._tapPortStart.y);
+        if (pdx > 10 || pdy > 10) {
+          window._tapPortTarget = null;
+          window._tapPortStart = null;
+          tPan = { sx: t0.clientX, sy: t0.clientY, stx: wsTx, sty: wsTy };
+        } else {
+          e.preventDefault();
+          return; // держим палец — ждём touchend
+        }
+      }
+      // Cancel long-press if finger moved more than 8px
+      if (tPan && (Math.abs(t0.clientX - tPan.sx) > 8 || Math.abs(t0.clientY - tPan.sy) > 8)) {
+        tMoved = true;
+        if (!tDrag) clearLP();
+      }
+      if (tDrag) {
+        // Long-press node drag (local coord delta = screen delta / scale)
+        var ldx = (t0.clientX - tDrag.stx) / wsScale;
+        var ldy = (t0.clientY - tDrag.sty) / wsScale;
+        tDrag.el.style.left = Math.max(0, tDrag.snl + ldx) + 'px';
+        tDrag.el.style.top  = Math.max(0, tDrag.snt + ldy) + 'px';
+        updateEdges();
+      } else if (tPan) {
+        // Pan workspace-inner
+        wsTx = tPan.stx + (t0.clientX - tPan.sx);
+        wsTy = tPan.sty + (t0.clientY - tPan.sy);
+        applyWsTransform();
+      }
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // ── TOUCHEND / TOUCHCANCEL ──────────────────────────────────────────────
+  ws.addEventListener('touchend', function(e) {
+    clearLP();
+    // ── ПОРТ: короткий тап без сдвига → синтетический click ─────────────────
+    if (window._tapPortTarget) {
+      var ch = e.changedTouches[0];
+      if (ch) {
+        var dx = Math.abs(ch.clientX - window._tapPortStart.x);
+        var dy = Math.abs(ch.clientY - window._tapPortStart.y);
+        if (dx < 15 && dy < 15) {
+          // Короткий тап — запускаем click-handler
+          window._tapPortTarget.dispatchEvent(new MouseEvent('click', {
+            bubbles: true, cancelable: true, view: window,
+            clientX: ch.clientX, clientY: ch.clientY
+          }));
+        }
+      }
+      window._tapPortTarget = null;
+      window._tapPortStart = null;
+      tPinch = null; tPan = null;
+      return;
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+    if (tDrag) {
+      tDrag.el.classList.remove('lp-drag');
+      tDrag = null;
+      userMoved = true;
+      updateEdges();
+    }
+    var rem = e.touches.length;
+    if (rem === 0)       { tPinch = null; tPan = null; }
+    else if (rem === 1 && tPinch) {
+      // Transition 2→1 finger: switch from pinch to pan
+      tPinch = null;
+      tPan = { sx: e.touches[0].clientX, sy: e.touches[0].clientY, stx: wsTx, sty: wsTy };
+    }
+  }, { passive: false });
+
+  ws.addEventListener('touchcancel', function() {
+    clearLP();
+    if (tDrag) { tDrag.el.classList.remove('lp-drag'); tDrag = null; }
+    tPinch = null; tPan = null;
+  }, { passive: false });
+
+  // Orientation change: reflow SVG + edges (keep user's zoom/pan)
+  window.addEventListener('orientationchange', function() {
+    setTimeout(function() { resizeSvg(); updateEdges(); }, 300);
+  });
+
+  // Expose reset for external use
+  function resetWsTransform() {
+    wsScale = 1.0; wsTx = 0; wsTy = 0;
+    wsInner.style.transform = '';
+    updateEdges();
+  }
+
+  // ── Edges
   var edges = []; var selected = null;
   function portCenter(port){ var pr = port.getBoundingClientRect(), wr = ws.getBoundingClientRect(); return { x: pr.left - wr.left + pr.width/2, y: pr.top - wr.top + pr.height/2 }; }
   function pathD(a,b){ var dx = Math.abs(b.x - a.x); var c1 = {x: a.x + dx*0.5, y: a.y}; var c2 = {x: b.x - dx*0.5, y: b.y}; return 'M ' + a.x + ' ' + a.y + ' C ' + c1.x + ' ' + c1.y + ', ' + c2.x + ' ' + c2.y + ', ' + b.x + ' ' + b.y; }
