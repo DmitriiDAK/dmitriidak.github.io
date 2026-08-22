@@ -1419,7 +1419,7 @@ document.getElementById('mailLink').addEventListener('click', function(e){
     // Этап 2
     ['.pipeline-container .blueprint:nth-child(2) .blueprint-header', 0, 'Этап 2', 'Stage 2'],
     ['.pipeline-container .blueprint:nth-child(2) h4', 0, 'AI Production', 'AI Production'],
-    ['.pipeline-container .blueprint:nth-child(2) p', 0, 'Генерация концептов и ассетов в Local ComfyUI, MJ или Google Nano Banana.', 'Concept and asset generation in Local ComfyUI, MJ, or Google Nano Banana.'],
+    ['.pipeline-container .blueprint:nth-child(2) p', 0, 'Генерация концептов и ассетов в Local ComfyUI, MJ, Seedream или GPT Image 2.', 'Concept and asset generation in Local ComfyUI, MJ, Seedream or GPT Image 2.'],
     ['.pipeline-container .blueprint:nth-child(2) .extra-badge', 0, '+ LoRA / .PSD', '+ LoRA / .PSD'],
 
     // Этап 3
@@ -1437,7 +1437,7 @@ document.getElementById('mailLink').addEventListener('click', function(e){
     // Этап 5
     ['.pipeline-container .blueprint:nth-child(5) .blueprint-header', 0, 'Этап 5', 'Stage 5'],
     ['.pipeline-container .blueprint:nth-child(5) h4', 0, 'Монтаж и Финиш', 'Editing & Finish'],
-    ['.pipeline-container .blueprint:nth-child(5) p', 0, 'Сборка видео, цветокоррекция и саунд-дизайн в DaVinci или Premiere.', 'Video editing, color grading, and sound design in DaVinci or Premiere.'],
+    ['.pipeline-container .blueprint:nth-child(5) p', 0, 'Сборка видео, цветокоррекция и саунд-дизайн в DaVinci Resolve или Premiere Pro.', 'Video editing, color grading, and sound design in DaVinci Resolve or Premiere Pro.'],
     ['.pipeline-container .blueprint:nth-child(5) .extra-badge', 0, '+ Исходники монтажа', '+ Project Files'],
 
     // Этап 6
