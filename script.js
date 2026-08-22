@@ -1296,6 +1296,51 @@ document.getElementById('mailLink').addEventListener('click', function(e){
     }, 500);
   });
 
+/* ── Ленивая загрузка изображений и видео (data-src + IntersectionObserver) ── */
+(function(){
+  var media = Array.prototype.slice.call(
+    document.querySelectorAll('img[data-src], video[data-src], source[data-src]')
+  );
+  if (!media.length) return;
+
+  function loadEl(el){
+    var src = el.getAttribute('data-src');
+    if (!src) return;
+    if (el.tagName === 'SOURCE'){
+      if (el.parentNode) el.parentNode.setAttribute('src', src);
+    } else {
+      el.src = src;
+    }
+    el.removeAttribute('data-src');
+    if (el.tagName === 'VIDEO' && typeof el.load === 'function') { try { el.load(); } catch(e){} }
+  }
+
+  function loadAll(){ media.forEach(loadEl); }
+
+  if (!('IntersectionObserver' in window)) { loadAll(); return; }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting) return;
+      loadEl(entry.target);
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '300px 0px' }); // стартуем загрузку чуть раньше, чем элемент попадёт в экран
+
+  media.forEach(function(el){ io.observe(el); });
+
+  // Страховка: если что-то осталось с data-src через 5 секунд после load — подгрузить
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      document.querySelectorAll('img[data-src], video[data-src], source[data-src]').forEach(function(el){
+        var r = el.getBoundingClientRect();
+        // грузим только то, что потенциально видно или близко
+        if (r.top < window.innerHeight * 2 && r.bottom > -window.innerHeight) loadEl(el);
+      });
+    }, 5000);
+  });
+})();
+
 /* ── Language toggle EN / RU ── */
 (function () {
   var lang = 'ru';
