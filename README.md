@@ -59,7 +59,7 @@ phasermin.js
 CatGame.js
 assets/
 
-© 2025 Dmitrii DAK. 
+© 2026 Dmitrii DAK. 
 Контакты: 
 Telegram @dmitrii_dak 
 VK [@dmitrystarlord](https://vk.com/dmitrystarlord) 
