@@ -73,7 +73,7 @@ Telegram @dmitrii_dak
 VK [@dmitrystarlord](https://vk.com/dmitrystarlord) 
 YouTube https://www.youtube.com/@dmitriidak
 
-Авторские права © 2026 Дмитрий ДАК. Все права защищены.
+Авторские права © 2026 Dmitrii DAK. Все права защищены.
 
 Исходный код, дизайн, изображения, видео и другой оригинальный контент
 данного портфолио защищены авторским правом.
