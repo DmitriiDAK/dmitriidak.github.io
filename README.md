@@ -72,3 +72,21 @@ assets/
 Telegram @dmitrii_dak 
 VK [@dmitrystarlord](https://vk.com/dmitrystarlord) 
 YouTube https://www.youtube.com/@dmitriidak
+
+Авторские права © 2026 Дмитрий ДАК. Все права защищены.
+
+Исходный код, дизайн, изображения, видео и другой оригинальный контент
+данного портфолио защищены авторским правом.
+
+Запрещается копировать, изменять, распространять, переиздавать,
+перепродавать или повторно использовать веб-сайт, его исходный код, дизайн, изображения или видео
+без предварительного письменного разрешения автора.
+
+Copyright © 2026 Dmitrii DAK. All Rights Reserved.
+
+The source code, design, images, videos and other original content
+of this portfolio are protected by copyright.
+
+No permission is granted to copy, modify, redistribute, republish,
+resell or reuse the website, its source code, design, images or videos
+without prior written permission from the author.
